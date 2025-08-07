@@ -39,27 +39,29 @@ function App() {
         if (/^07\d{8}$/.test(normalizedPhone)) {
           normalizedPhone = '254' + normalizedPhone.slice(1);
         }
-        setPhone(normalizedPhone);
-      }
-      setMessages(prev => [
-        ...prev,
-        {
-          text: response.data.response,
-          isUser: false,
-          time: new Date()
-        }
-      ]);
-    } catch (error) {
-      setMessages(prev => [
-        ...prev,
-        {
-          text: "Sorry, we're having trouble connecting to the service. Please try again later.",
-          isUser: false,
-          time: new Date()
-        }
-      ]);
+         setPhone(normalizedPhone);
     }
-  };
+
+    setMessages(prev => [
+      ...prev,
+      {
+        text: response.data.response,
+        isUser: false,
+        time: new Date()
+      }
+    ]);
+  } catch (error) {
+    const errorMsg = error.response?.data?.response || error.message || "An unknown error occurred.";
+    setMessages(prev => [
+      ...prev,
+      {
+        text: errorMsg,
+        isUser: false,
+        time: new Date()
+      }
+    ]);
+  }
+};
 
   return (
     <div className="app">
