@@ -29,7 +29,7 @@ function App() {
 
     // Always send every message to backend, let backend control the flow
     try {
-      const response = await axios.post('http://172.31.12.169:5001/api/sms', {
+      const response = await axios.post('http://52.48.121.185:5001/api/sms', {
         from: phone || message, // send phone if known, else send message (for first PENZI/phone input)
         message: message
       });
